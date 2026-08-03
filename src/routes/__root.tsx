@@ -77,21 +77,32 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Asian Pest Control | Pest Control Services in Fatehgunj, Vadodara" },
+      {
+        name: "description",
+        content:
+          "Asian Pest Control has been protecting homes and businesses in Fatehgunj, Vadodara, Gujarat since 1995. Safe, effective and eco-friendly pest control solutions.",
+      },
+      { name: "author", content: "Asian Pest Control" },
+      {
+        property: "og:title",
+        content: "Asian Pest Control | Pest Control Services in Fatehgunj, Vadodara",
+      },
+      {
+        property: "og:description",
+        content:
+          "Trusted pest control services in Vadodara since 1995. Residential, commercial and industrial pest management solutions.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:site", content: "@AsianPestControl" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
     ],
   }),
   shellComponent: RootShell,
