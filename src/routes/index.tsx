@@ -221,7 +221,7 @@ function Index() {
               </a>
             ))}
             <a
-              href={`tel:${phoneNumber}`}
+              href={`tel:${phoneNumber.replace(/\s/g, "")}`}
               className="inline-flex items-center gap-2 rounded-full bg-brand px-4 py-2 text-sm font-semibold text-brand-foreground transition-transform hover:scale-105"
             >
               <Phone className="h-4 w-4" />
@@ -253,7 +253,7 @@ function Index() {
                 </a>
               ))}
               <a
-                href={`tel:${phoneNumber}`}
+                href={`tel:${phoneNumber.replace(/\s/g, "")}`}
                 className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-brand px-4 py-3 text-base font-semibold text-brand-foreground"
               >
                 <Phone className="h-4 w-4" />
@@ -281,7 +281,7 @@ function Index() {
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <a
-                href={`tel:${phoneNumber}`}
+                href={`tel:${phoneNumber.replace(/\s/g, "")}`}
                 className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-base font-semibold text-brand-foreground shadow-md transition-transform hover:scale-105"
               >
                 <Phone className="h-5 w-5" />
@@ -528,7 +528,7 @@ function Index() {
                   <div>
                     <div className="text-sm font-medium text-muted-foreground">Phone / WhatsApp</div>
                     <a
-                      href={`tel:${phoneNumber}`}
+                      href={`tel:${phoneNumber.replace(/\s/g, "")}`}
                       className="text-lg font-semibold text-navy hover:text-brand"
                     >
                       {phoneNumber}
@@ -621,7 +621,7 @@ function Index() {
                 </button>
                 <p className="text-center text-xs text-muted-foreground">
                   Or call us directly at{" "}
-                  <a href={`tel:${phoneNumber}`} className="font-medium text-brand hover:underline">
+                  <a href={`tel:${phoneNumber.replace(/\s/g, "")}`} className="font-medium text-brand hover:underline">
                     {phoneNumber}
                   </a>
                 </p>
