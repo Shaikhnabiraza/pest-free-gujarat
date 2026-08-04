@@ -92,11 +92,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         property: "og:description",
         content:
-          "Trusted pest control services in Vadodara since 1995. Residential, commercial and industrial pest management solutions.",
+          "Asian Pest Control has been protecting homes and businesses in Fatehgunj, Vadodara, Gujarat since 1995. Safe, effective and eco-friendly pest control solutions.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@AsianPestControl" },
+      { name: "twitter:title", content: "Asian Pest Control | Pest Control Services in Fatehgunj, Vadodara" },
+      { name: "twitter:description", content: "Asian Pest Control has been protecting homes and businesses in Fatehgunj, Vadodara, Gujarat since 1995. Safe, effective and eco-friendly pest control solutions." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f5721947-871f-41de-a218-cd954424dce5/id-preview-8c408690--54f13ee3-bf4d-4242-a0fc-09e3186cf1d3.lovable.app-1785850100630.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f5721947-871f-41de-a218-cd954424dce5/id-preview-8c408690--54f13ee3-bf4d-4242-a0fc-09e3186cf1d3.lovable.app-1785850100630.png" },
     ],
     links: [
       {
