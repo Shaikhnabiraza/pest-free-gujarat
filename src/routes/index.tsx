@@ -17,6 +17,7 @@ import {
   ChevronRight,
   ArrowRight,
   MousePointer2,
+  MessageCircle,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -29,7 +30,7 @@ export const Route = createFileRoute("/")({
       "@type": "LocalBusiness",
       name: "Asian Pest Control",
       image: `${siteUrl}/images/hero-pest-control.jpg`,
-      telephone: "+91-98250-XXXXX",
+      telephone: "+91-99981-79902",
       address: {
         "@type": "PostalAddress",
         streetAddress: "Near Fatehgunj Main Road",
@@ -87,8 +88,9 @@ export const Route = createFileRoute("/")({
   },
 });
 
-const phoneNumber = "+91-98250-XXXXX";
-const whatsappNumber = "+91-98250-XXXXX";
+const phoneNumber = "+91 99981 79902";
+const whatsappNumber = "+91 99981 79902";
+const nickname = "Munna Bhai";
 const businessAddress = "Asian Pest Control, Near Fatehgunj Main Road, Vadodara, Gujarat, India";
 
 const navLinks = [
@@ -201,6 +203,9 @@ function Index() {
             <img src="/favicon.png" alt="Asian Pest Control logo" width={36} height={36} className="rounded" />
             <div className="leading-tight">
               <span className="block text-lg font-bold tracking-tight text-navy">Asian Pest Control</span>
+              <span className="block text-xs font-semibold uppercase tracking-widest text-brand">
+                {nickname}
+              </span>
               <span className="block text-xs text-muted-foreground">Vadodara • Since 1995</span>
             </div>
           </a>
@@ -633,7 +638,12 @@ function Index() {
             <div>
               <div className="flex items-center gap-2">
                 <img src="/favicon.png" alt="Asian Pest Control" width={32} height={32} className="rounded" />
-                <span className="text-lg font-bold text-navy">Asian Pest Control</span>
+                <div className="leading-tight">
+                  <span className="block text-lg font-bold text-navy">Asian Pest Control</span>
+                  <span className="block text-xs font-semibold uppercase tracking-widest text-brand">
+                    {nickname}
+                  </span>
+                </div>
               </div>
               <p className="mt-4 text-sm text-muted-foreground">
                 Trusted pest control services in Fatehgunj, Vadodara, Gujarat since 1995.
@@ -691,6 +701,53 @@ function Index() {
           </div>
         </div>
       </footer>
+
+      <WhatsAppToggle />
+    </div>
+  );
+}
+
+function WhatsAppToggle() {
+  const [open, setOpen] = useState(false);
+  const waLink = `https://wa.me/${whatsappNumber.replace(/\D/g, "")}?text=${encodeURIComponent(
+    "Hi Asian Pest Control (Munna Bhai), I need pest control service in Vadodara.",
+  )}`;
+
+  return (
+    <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-3">
+      {open && (
+        <div className="w-64 rounded-2xl border border-border bg-card p-4 shadow-xl">
+          <p className="text-sm font-semibold text-navy">Chat with {nickname}</p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            Asian Pest Control • {phoneNumber}
+          </p>
+          <a
+            href={waLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-brand px-4 py-2 text-sm font-semibold text-brand-foreground"
+          >
+            <MessageCircle className="h-4 w-4" />
+            Open WhatsApp
+          </a>
+          <a
+            href={`tel:${phoneNumber.replace(/\s/g, "")}`}
+            className="mt-2 flex items-center justify-center gap-2 rounded-xl border border-border px-4 py-2 text-sm font-semibold text-navy"
+          >
+            <Phone className="h-4 w-4" />
+            Call {phoneNumber}
+          </a>
+        </div>
+      )}
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-label={open ? "Close WhatsApp chat" : "Chat on WhatsApp"}
+        className="flex h-14 w-14 items-center justify-center rounded-full bg-brand text-brand-foreground shadow-lg transition-transform hover:scale-105"
+      >
+        {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-7 w-7" />}
+      </button>
     </div>
   );
 }
