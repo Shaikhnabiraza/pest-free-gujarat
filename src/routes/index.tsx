@@ -184,6 +184,8 @@ const steps = [
 function Index() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
+
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -291,7 +293,7 @@ function Index() {
               <a
                 href={`https://wa.me/${whatsappNumber.replace(/\D/g, "")}`}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-base font-semibold text-foreground transition-colors hover:bg-accent"
               >
                 WhatsApp Us
@@ -569,13 +571,24 @@ function Index() {
                   e.preventDefault();
                   const form = e.currentTarget;
                   const data = new FormData(form);
-                  const name = data.get("name");
-                  const phone = data.get("phone");
-                  const message = data.get("message");
-                  const body = `Hi Asian Pest Control,%0A%0AName: ${name}%0APhone: ${phone}%0AMessage: ${message}`;
-                  window.open(`https://wa.me/${whatsappNumber.replace(/\D/g, "")}?text=${body}`, "_blank");
+                  const name = String(data.get("name") ?? "").trim().slice(0, 100);
+                  const phone = String(data.get("phone") ?? "").trim().slice(0, 20);
+                  const message = String(data.get("message") ?? "").trim().slice(0, 1000);
+                  if (!name || !/^[0-9+\s-]{10,20}$/.test(phone)) {
+                    setFormError("Please enter your name and a valid phone number.");
+                    return;
+                  }
+                  setFormError(null);
+                  const body = encodeURIComponent(
+                    `Hi Asian Pest Control (Munna Bhai),\n\nName: ${name}\nPhone: ${phone}\nService needed: ${message || "Not specified"}`,
+                  );
+                  const url = `https://wa.me/${whatsappNumber.replace(/\D/g, "")}?text=${body}`;
+                  const win = window.open(url, "_blank", "noopener,noreferrer");
+                  if (!win) window.location.href = url;
+                  form.reset();
                 }}
               >
+
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-foreground">
                     Full name
@@ -614,7 +627,13 @@ function Index() {
                     className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-foreground outline-none ring-offset-background focus:ring-2 focus:ring-ring"
                   />
                 </div>
+                {formError && (
+                  <p role="alert" className="text-sm font-medium text-destructive">
+                    {formError}
+                  </p>
+                )}
                 <button
+
                   type="submit"
                   className="w-full rounded-xl bg-brand px-4 py-3 text-base font-semibold text-brand-foreground shadow-md transition-transform hover:scale-[1.02]"
                 >
