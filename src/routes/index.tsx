@@ -184,6 +184,8 @@ const steps = [
 function Index() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
+
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
