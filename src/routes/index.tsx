@@ -569,13 +569,24 @@ function Index() {
                   e.preventDefault();
                   const form = e.currentTarget;
                   const data = new FormData(form);
-                  const name = data.get("name");
-                  const phone = data.get("phone");
-                  const message = data.get("message");
-                  const body = `Hi Asian Pest Control,%0A%0AName: ${name}%0APhone: ${phone}%0AMessage: ${message}`;
-                  window.open(`https://wa.me/${whatsappNumber.replace(/\D/g, "")}?text=${body}`, "_blank");
+                  const name = String(data.get("name") ?? "").trim().slice(0, 100);
+                  const phone = String(data.get("phone") ?? "").trim().slice(0, 20);
+                  const message = String(data.get("message") ?? "").trim().slice(0, 1000);
+                  if (!name || !/^[0-9+\s-]{10,20}$/.test(phone)) {
+                    setFormError("Please enter your name and a valid phone number.");
+                    return;
+                  }
+                  setFormError(null);
+                  const body = encodeURIComponent(
+                    `Hi Asian Pest Control (Munna Bhai),\n\nName: ${name}\nPhone: ${phone}\nService needed: ${message || "Not specified"}`,
+                  );
+                  const url = `https://wa.me/${whatsappNumber.replace(/\D/g, "")}?text=${body}`;
+                  const win = window.open(url, "_blank", "noopener,noreferrer");
+                  if (!win) window.location.href = url;
+                  form.reset();
                 }}
               >
+
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-foreground">
                     Full name
