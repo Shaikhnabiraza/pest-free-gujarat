@@ -627,7 +627,13 @@ function Index() {
                     className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-foreground outline-none ring-offset-background focus:ring-2 focus:ring-ring"
                   />
                 </div>
+                {formError && (
+                  <p role="alert" className="text-sm font-medium text-destructive">
+                    {formError}
+                  </p>
+                )}
                 <button
+
                   type="submit"
                   className="w-full rounded-xl bg-brand px-4 py-3 text-base font-semibold text-brand-foreground shadow-md transition-transform hover:scale-[1.02]"
                 >
