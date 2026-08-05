@@ -583,9 +583,17 @@ function Index() {
                     `Hi Asian Pest Control (Munna Bhai),\n\nName: ${name}\nPhone: ${phone}\nService needed: ${message || "Not specified"}`,
                   );
                   const url = `https://wa.me/${whatsappNumber.replace(/\D/g, "")}?text=${body}`;
-                  const win = window.open(url, "_blank", "noopener,noreferrer");
-                  if (!win) window.location.href = url;
+                  // Safari blocks window.open() navigations to WhatsApp via COOP,
+                  // so trigger a real link click instead.
+                  const link = document.createElement("a");
+                  link.href = url;
+                  link.target = "_blank";
+                  link.rel = "noopener noreferrer";
+                  document.body.appendChild(link);
+                  link.click();
+                  link.remove();
                   form.reset();
+
                 }}
               >
 
