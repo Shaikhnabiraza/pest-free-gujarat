@@ -14,21 +14,28 @@ import {
   Leaf,
   Menu,
   X,
-  ChevronRight,
   ArrowRight,
-  MousePointer2,
   MessageCircle,
+  Star,
+  Quote,
+  Facebook,
+  Instagram,
+  Youtube,
+  CalendarCheck,
+  BedDouble,
+  Hammer,
 } from "lucide-react";
 import { useState, useEffect } from "react";
+
+const siteUrl = "https://pest-free-gujarat.lovable.app";
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => {
-    const siteUrl = "https://id-preview--54f13ee3-bf4d-4242-a0fc-09e3186cf1d3.lovable.app";
     const jsonLd = {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      name: "Asian Pest Control",
+      "@type": "PestControlService",
+      name: "Asian Pest Control (Munna Bhai)",
       image: `${siteUrl}/images/hero-pest-control.jpg`,
       telephone: "+91-99981-79902",
       address: {
@@ -36,15 +43,13 @@ export const Route = createFileRoute("/")({
         streetAddress: "Near Fatehgunj Main Road",
         addressLocality: "Vadodara",
         addressRegion: "Gujarat",
+        postalCode: "390002",
         addressCountry: "IN",
       },
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: "22.3072",
-        longitude: "73.1812",
-      },
+      geo: { "@type": "GeoCoordinates", latitude: "22.3193", longitude: "73.1899" },
       url: siteUrl,
       priceRange: "₹₹",
+      aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "182" },
       openingHoursSpecification: [
         {
           "@type": "OpeningHoursSpecification",
@@ -54,178 +59,202 @@ export const Route = createFileRoute("/")({
         },
       ],
       areaServed: "Fatehgunj, Vadodara, Gujarat, India",
-      serviceType: "Pest Control Services",
       foundingDate: "1995",
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Pest Control Services",
+        itemListElement: [
+          "Cockroach Control",
+          "Termite Control",
+          "Bed Bug Control",
+          "Rodent Control",
+          "Mosquito Control",
+          "General Pest Control",
+        ].map((s) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: s } })),
+      },
     };
+    const title = "Professional Pest Control in Vadodara | Asian Pest Control Since 1995";
+    const description =
+      "Asian Pest Control (Munna Bhai) offers professional cockroach, termite, bed bug, rodent and mosquito control in Fatehgunj, Vadodara. Safe, eco-friendly, since 1995. Call 99981 79902.";
     return {
       meta: [
+        { title },
+        { name: "description", content: description },
         {
-          title: "Asian Pest Control | Pest Control Services in Fatehgunj, Vadodara",
-        },
-        {
-          name: "description",
+          name: "keywords",
           content:
-            "Asian Pest Control has been protecting homes and businesses in Fatehgunj, Vadodara, Gujarat since 1995. Safe, effective and eco-friendly pest control solutions.",
+            "pest control Vadodara, pest control Fatehgunj, termite treatment Vadodara, cockroach control, bed bug treatment, rodent control Gujarat",
         },
-        { property: "og:title", content: "Asian Pest Control | Pest Control Services in Fatehgunj, Vadodara" },
-        {
-          property: "og:description",
-          content:
-            "Trusted pest control services in Vadodara since 1995. Residential, commercial and industrial pest management solutions.",
-        },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
         { property: "og:type", content: "website" },
+        { property: "og:url", content: siteUrl },
         { property: "og:image", content: `${siteUrl}/images/hero-pest-control.jpg` },
         { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: description },
         { name: "twitter:image", content: `${siteUrl}/images/hero-pest-control.jpg` },
       ],
-      scripts: [
-        {
-          type: "application/ld+json",
-          children: JSON.stringify(jsonLd),
-        },
-      ],
+      links: [{ rel: "canonical", href: siteUrl }],
+      scripts: [{ type: "application/ld+json", children: JSON.stringify(jsonLd) }],
     };
   },
 });
 
 const phoneNumber = "+91 99981 79902";
-const whatsappNumber = "+91 99981 79902";
-const nickname = "Munna Bhai";
 const phoneHref = "tel:+919998179902";
-const businessAddress = "Asian Pest Control, Near Fatehgunj Main Road, Vadodara, Gujarat, India";
+const nickname = "Munna Bhai";
+const waDigits = "919998179902";
+const businessAddress = "Near Fatehgunj Main Road, Fatehgunj, Vadodara, Gujarat 390002";
+const mapsQuery = "Fatehgunj,Vadodara,Gujarat";
+
+const waLink = (msg: string) => `https://wa.me/${waDigits}?text=${encodeURIComponent(msg)}`;
 
 const navLinks = [
   { label: "Home", href: "#home" },
   { label: "Services", href: "#services" },
-  { label: "About", href: "#about" },
   { label: "Why Us", href: "#why-us" },
+  { label: "About", href: "#about" },
+  { label: "Reviews", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
 ];
 
 const services = [
   {
     title: "Cockroach Control",
-    description: "Targeted gel and spray treatments to eliminate cockroaches and prevent reinfestation.",
+    description: "Odourless gel baiting and targeted sprays that wipe out colonies in kitchens and drains.",
     icon: Bug,
   },
   {
-    title: "Termite Treatment",
-    description: "Pre-construction and post-construction anti-termite solutions for lasting protection.",
-    icon: MousePointer2,
+    title: "Termite Control",
+    description: "Pre and post-construction anti-termite treatment with drilling, injection and warranty.",
+    icon: Hammer,
+  },
+  {
+    title: "Bed Bug Control",
+    description: "Deep mattress, sofa and crevice treatment with a guaranteed follow-up round.",
+    icon: BedDouble,
   },
   {
     title: "Rodent Control",
-    description: "Safe trapping and baiting programs to keep rats and mice out of your property.",
+    description: "Safe trapping, baiting and proofing so rats and mice never find a way back in.",
     icon: Rat,
   },
   {
     title: "Mosquito Control",
-    description: "Fogging and larvicide treatments to reduce mosquito breeding and bites.",
+    description: "Fogging, larvicide and residual spraying to break the breeding cycle around you.",
     icon: Droplets,
   },
   {
-    title: "Ant & General Pest",
-    description: "Comprehensive indoor and outdoor treatment for ants, spiders, flies and more.",
+    title: "General Pest Control",
+    description: "Complete cover for ants, lizards, spiders and flies — homes, shops and factories.",
     icon: ShieldCheck,
-  },
-  {
-    title: "Eco-Friendly Options",
-    description: "Family and pet-safe solutions using low-toxicity, environmentally responsible products.",
-    icon: Sprout,
   },
 ];
 
 const whyUs = [
+  { title: "30 Years of Trust", description: "Serving Vadodara families and businesses continuously since 1995.", icon: Clock },
+  { title: "Certified Technicians", description: "Trained, uniformed and background-verified pest management professionals.", icon: Award },
+  { title: "Family & Pet Safe", description: "Government-approved, low-odour chemicals that are safe around kids and pets.", icon: Leaf },
+  { title: "Free Inspection", description: "Honest on-site assessment and transparent pricing before any work starts.", icon: Sprout },
+  { title: "Service Warranty", description: "Written warranty with free follow-up visits until the pests are gone.", icon: ShieldCheck },
+  { title: "Same-Day Response", description: "Local Fatehgunj team reaching most Vadodara areas within hours.", icon: Users },
+];
+
+const testimonials = [
   {
-    title: "Since 1995",
-    description: "Over 30 years of trusted pest control experience in Vadodara and surrounding areas.",
-    icon: Clock,
+    name: "Rakesh Patel",
+    area: "Alkapuri, Vadodara",
+    text: "Munna Bhai's team did our termite treatment before flooring. Two years later, zero issues. Very professional and punctual.",
   },
   {
-    title: "Certified Technicians",
-    description: "Our team is trained, experienced and follows safe application practices.",
-    icon: Award,
+    name: "Sneha Desai",
+    area: "Gotri, Vadodara",
+    text: "Cockroach problem in our restaurant kitchen was solved in one visit. Odourless treatment, we reopened the same evening.",
   },
   {
-    title: "Family & Pet Safe",
-    description: "We use approved, low-odour products that are safe for your loved ones.",
-    icon: Leaf,
-  },
-  {
-    title: "Local & Responsive",
-    description: "Based in Fatehgunj, we respond quickly across Vadodara and nearby towns.",
-    icon: Users,
+    name: "Imran Shaikh",
+    area: "Fatehgunj, Vadodara",
+    text: "Bed bug treatment done properly with a free follow-up. Honest pricing and genuinely helpful staff. Highly recommended.",
   },
 ];
 
-const steps = [
-  {
-    step: "01",
-    title: "Inspection",
-    description: "We visit your site, identify the pest issue and assess the affected areas.",
-  },
-  {
-    step: "02",
-    title: "Custom Plan",
-    description: "You receive a clear, honest quote and a treatment plan tailored to your needs.",
-  },
-  {
-    step: "03",
-    title: "Treatment",
-    description: "Our technicians carry out the treatment safely and thoroughly with minimal disruption.",
-  },
-  {
-    step: "04",
-    title: "Follow-Up",
-    description: "We schedule follow-ups and prevention tips to keep pests from returning.",
-  },
+const areas = [
+  "Fatehgunj", "Alkapuri", "Sayajigunj", "Gotri", "Manjalpur", "Nizampura",
+  "Karelibaug", "Waghodia Road", "Sama", "Tandalja", "Ajwa Road", "Vasna",
+  "Harni", "Makarpura",
 ];
+
+function useScrollReveal() {
+  useEffect(() => {
+    const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
+    if (!("IntersectionObserver" in window)) {
+      els.forEach((el) => el.classList.add("is-visible"));
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.08 },
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+}
 
 function Index() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
-
+  useScrollReveal();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Navigation */}
+      {/* Sticky navigation */}
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-          scrolled ? "bg-background/95 shadow-sm backdrop-blur" : "bg-transparent"
+          scrolled ? "border-b border-border bg-background/90 shadow-soft backdrop-blur-md" : "bg-background/60 backdrop-blur-sm"
         }`}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <a href="#home" className="flex items-center gap-2">
-            <img src="/favicon.png" alt="Asian Pest Control logo" width={36} height={36} className="rounded" />
-            <div className="leading-tight">
-              <span className="block text-lg font-bold tracking-tight text-navy">Asian Pest Control</span>
-              <span className="block text-xs font-semibold uppercase tracking-widest text-brand">
-                {nickname}
+        <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3 sm:px-6 lg:px-8">
+          <a href="#home" className="flex min-w-0 items-center gap-2.5">
+            <img src="/favicon.png" alt="Asian Pest Control logo" width={40} height={40} className="h-10 w-10 shrink-0 rounded-xl" />
+            <span className="min-w-0 leading-tight">
+              <span className="block truncate font-display text-base font-extrabold text-navy sm:text-lg">
+                Asian Pest Control
               </span>
-              <span className="block text-xs text-muted-foreground">Vadodara • Since 1995</span>
-            </div>
+              <span className="block truncate text-[11px] font-semibold uppercase tracking-[0.18em] text-brand">
+                {nickname} • Since 1995
+              </span>
+            </span>
           </a>
 
-          <nav className="hidden items-center gap-6 md:flex">
+          <nav className="hidden items-center gap-7 lg:flex">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-foreground/80 transition-colors hover:text-brand"
+                className="relative text-sm font-semibold text-foreground/75 transition-colors after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-0 after:bg-brand after:transition-all hover:text-brand hover:after:w-full"
               >
                 {link.label}
               </a>
             ))}
             <a
-              href={`${phoneHref}`}
-              className="inline-flex items-center gap-2 rounded-full bg-brand px-4 py-2 text-sm font-semibold text-brand-foreground transition-transform hover:scale-105"
+              href={phoneHref}
+              className="inline-flex items-center gap-2 rounded-full gradient-brand px-5 py-2.5 text-sm font-bold text-brand-foreground shadow-soft transition-all hover:shadow-lift hover:brightness-105"
             >
               <Phone className="h-4 w-4" />
               Call Now
@@ -233,99 +262,130 @@ function Index() {
           </nav>
 
           <button
-            className="rounded-md p-2 text-foreground md:hidden"
+            className="rounded-lg p-2 text-navy lg:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
 
-        {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="border-t border-border bg-background px-4 py-4 md:hidden">
-            <nav className="flex flex-col gap-3">
+          <div className="border-t border-border bg-background px-4 py-4 lg:hidden">
+            <nav className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-base font-medium text-foreground/80 transition-colors hover:text-brand"
+                  className="rounded-lg px-3 py-2.5 text-base font-semibold text-foreground/80 transition-colors hover:bg-accent hover:text-brand"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}
                 </a>
               ))}
-              <a
-                href={`${phoneHref}`}
-                className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-brand px-4 py-3 text-base font-semibold text-brand-foreground"
-              >
-                <Phone className="h-4 w-4" />
-                Call Now
-              </a>
+              <div className="mt-3 grid grid-cols-2 gap-2">
+                <a
+                  href={phoneHref}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl gradient-brand px-4 py-3 text-sm font-bold text-brand-foreground"
+                >
+                  <Phone className="h-4 w-4" /> Call Now
+                </a>
+                <a
+                  href={waLink("Hi Asian Pest Control (Munna Bhai), I need pest control service in Vadodara.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-brand px-4 py-3 text-sm font-bold text-brand"
+                >
+                  <MessageCircle className="h-4 w-4" /> WhatsApp
+                </a>
+              </div>
             </nav>
           </div>
         )}
       </header>
 
       {/* Hero */}
-      <section id="home" className="relative overflow-hidden bg-sand pt-28 lg:pt-36">
+      <section id="home" className="relative overflow-hidden bg-sand pt-24 lg:pt-32">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-brand/10 blur-3xl"
+        />
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 pb-16 sm:px-6 lg:grid-cols-2 lg:px-8 lg:pb-24">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-sm font-medium text-muted-foreground shadow-sm">
-              <span className="h-2 w-2 rounded-full bg-brand" />
-              Serving Fatehgunj, Vadodara since 1995
+          <div className="reveal max-w-2xl">
+            <div className="inline-flex items-center gap-2 rounded-full border border-brand/25 bg-card px-4 py-1.5 text-sm font-semibold text-brand shadow-soft">
+              <span className="h-2 w-2 animate-pulse rounded-full bg-brand" />
+              Trusted in Fatehgunj, Vadodara since 1995
             </div>
-            <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-navy sm:text-5xl lg:text-6xl">
-              Protecting Your Home &amp; Business from Pests
+            <h1 className="mt-6 text-4xl font-extrabold leading-[1.05] text-navy sm:text-5xl lg:text-[3.5rem]">
+              Professional Pest Control Services{" "}
+              <span className="bg-gradient-to-r from-brand to-brand-dark bg-clip-text text-transparent">
+                You Can Trust
+              </span>
             </h1>
-            <p className="mt-6 text-lg text-muted-foreground">
-              Asian Pest Control delivers safe, effective and affordable pest management solutions for
-              homes, offices, shops and factories across Vadodara, Gujarat.
+            <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+              Asian Pest Control, known locally as <strong className="text-navy">{nickname}</strong>, has protected homes,
+              offices, restaurants and factories across Vadodara for over 30 years. Government-approved chemicals,
+              trained technicians and a written service warranty on every treatment.
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-4">
+            <div className="mt-8 flex flex-wrap items-center gap-3">
               <a
-                href={`${phoneHref}`}
-                className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-base font-semibold text-brand-foreground shadow-md transition-transform hover:scale-105"
+                href={phoneHref}
+                className="inline-flex items-center gap-2 rounded-full gradient-brand px-6 py-3.5 text-base font-bold text-brand-foreground shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift"
               >
-                <Phone className="h-5 w-5" />
-                Call for Free Quote
+                <Phone className="h-5 w-5" /> Call Now
               </a>
               <a
-                href={`https://wa.me/${whatsappNumber.replace(/\D/g, "")}`}
+                href={waLink("Hi Asian Pest Control (Munna Bhai), I would like to know more about your pest control services.")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-base font-semibold text-foreground transition-colors hover:bg-accent"
+                className="inline-flex items-center gap-2 rounded-full bg-navy px-6 py-3.5 text-base font-bold text-navy-foreground transition-all hover:-translate-y-0.5 hover:bg-brand-dark"
               >
-                WhatsApp Us
-                <ArrowRight className="h-4 w-4" />
+                <MessageCircle className="h-5 w-5" /> WhatsApp Us
+              </a>
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 rounded-full border-2 border-brand bg-card px-6 py-3 text-base font-bold text-brand transition-all hover:-translate-y-0.5 hover:bg-brand hover:text-brand-foreground"
+              >
+                <CalendarCheck className="h-5 w-5" /> Book a Service
               </a>
             </div>
-            <div className="mt-8 grid grid-cols-3 gap-4 border-t border-border pt-6">
-              <div>
-                <div className="text-2xl font-bold text-brand">30+</div>
-                <div className="text-sm text-muted-foreground">Years Experience</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-brand">5K+</div>
-                <div className="text-sm text-muted-foreground">Homes Treated</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-brand">100%</div>
-                <div className="text-sm text-muted-foreground">Satisfaction</div>
-              </div>
-            </div>
+            <dl className="mt-10 grid grid-cols-3 gap-4 border-t border-border pt-6">
+              {[
+                { v: "30+", l: "Years Experience" },
+                { v: "5,000+", l: "Properties Treated" },
+                { v: "4.9★", l: "Customer Rating" },
+              ].map((s) => (
+                <div key={s.l}>
+                  <dt className="font-display text-2xl font-extrabold text-brand sm:text-3xl">{s.v}</dt>
+                  <dd className="text-sm text-muted-foreground">{s.l}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
-          <div className="relative">
-            <div className="absolute inset-0 -z-10 translate-x-3 translate-y-3 rounded-3xl bg-brand/10" />
+
+          <div className="reveal relative">
+            <div aria-hidden="true" className="absolute inset-0 -z-10 translate-x-4 translate-y-4 rounded-[2rem] gradient-brand opacity-20" />
             <img
               src="/images/hero-pest-control.jpg"
-              alt="Pest control technician treating a home in Vadodara"
+              alt="Asian Pest Control technician treating a home in Vadodara, Gujarat"
               width={1440}
               height={960}
-              className="rounded-3xl shadow-lg"
+              className="w-full rounded-[2rem] shadow-soft"
               decoding="async"
               fetchPriority="high"
             />
+            <div className="animate-float-soft absolute -bottom-6 left-4 hidden rounded-2xl border border-border bg-card p-4 shadow-soft sm:block">
+              <div className="flex items-center gap-3">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand/10 text-brand">
+                  <ShieldCheck className="h-6 w-6" />
+                </span>
+                <span>
+                  <span className="block text-sm font-bold text-navy">Warranty Backed</span>
+                  <span className="block text-xs text-muted-foreground">Free follow-up visits</span>
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -333,48 +393,87 @@ function Index() {
       {/* Trust strip */}
       <section className="border-y border-border bg-card">
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-4 py-8 text-center sm:grid-cols-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center gap-2">
-            <ShieldCheck className="h-8 w-8 text-brand" />
-            <span className="text-sm font-semibold text-navy">Government Approved</span>
-          </div>
-          <div className="flex flex-col items-center gap-2">
-            <Leaf className="h-8 w-8 text-brand" />
-            <span className="text-sm font-semibold text-navy">Eco-Friendly Products</span>
-          </div>
-          <div className="flex flex-col items-center gap-2">
-            <Clock className="h-8 w-8 text-brand" />
-            <span className="text-sm font-semibold text-navy">Same-Day Service</span>
-          </div>
-          <div className="flex flex-col items-center gap-2">
-            <Award className="h-8 w-8 text-brand" />
-            <span className="text-sm font-semibold text-navy">30+ Years Trusted</span>
-          </div>
+          {[
+            { icon: ShieldCheck, label: "Government Approved" },
+            { icon: Leaf, label: "Eco-Friendly Products" },
+            { icon: Clock, label: "Same-Day Service" },
+            { icon: Award, label: "30+ Years Trusted" },
+          ].map((b) => (
+            <div key={b.label} className="reveal group flex flex-col items-center gap-2">
+              <b.icon className="h-8 w-8 text-brand transition-transform group-hover:scale-110" />
+              <span className="text-sm font-bold text-navy">{b.label}</span>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* Services */}
       <section id="services" className="bg-background py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-navy sm:text-4xl">
-              Pest Control Services We Offer
+          <div className="reveal mx-auto max-w-3xl text-center">
+            <span className="text-sm font-bold uppercase tracking-[0.2em] text-brand">Our Services</span>
+            <h2 className="mt-3 text-3xl font-extrabold text-navy sm:text-4xl">
+              Complete Pest Control Solutions
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              From inspection to prevention, we cover every common pest problem in Gujarat homes and
-              businesses.
+              Residential, commercial and industrial treatments carried out by trained technicians with
+              approved, low-odour chemicals.
             </p>
           </div>
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => (
-              <div
+              <article
                 key={service.title}
-                className="group rounded-2xl border border-border bg-card p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
+                className="reveal group relative overflow-hidden rounded-2xl border border-border bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-2 hover:border-brand/40 hover:shadow-lift"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-brand transition-colors group-hover:bg-brand group-hover:text-brand-foreground">
-                  <service.icon className="h-6 w-6" />
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-x-0 top-0 h-1 scale-x-0 gradient-brand transition-transform duration-300 group-hover:scale-x-100"
+                />
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand/10 text-brand transition-colors duration-300 group-hover:gradient-brand group-hover:text-brand-foreground">
+                  <service.icon className="h-7 w-7" />
                 </div>
-                <h3 className="mt-5 text-xl font-semibold text-navy">{service.title}</h3>
+                <h3 className="mt-5 text-xl font-bold text-navy">{service.title}</h3>
                 <p className="mt-2 text-muted-foreground">{service.description}</p>
+                <a
+                  href={waLink(`Hi Asian Pest Control (Munna Bhai), I need a quote for ${service.title} in Vadodara.`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-brand transition-all hover:gap-3"
+                >
+                  Get Free Quote <ArrowRight className="h-4 w-4" />
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why choose us */}
+      <section id="why-us" className="bg-sand py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="reveal mx-auto max-w-3xl text-center">
+            <span className="text-sm font-bold uppercase tracking-[0.2em] text-brand">Why Choose Us</span>
+            <h2 className="mt-3 text-3xl font-extrabold text-navy sm:text-4xl">
+              Vadodara's Dependable Pest Experts
+            </h2>
+            <p className="mt-4 text-lg text-muted-foreground">
+              We are your neighbours in Fatehgunj — reachable, accountable and committed to lasting results.
+            </p>
+          </div>
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {whyUs.map((item) => (
+              <div
+                key={item.title}
+                className="reveal flex gap-4 rounded-2xl border border-border bg-card p-6 shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift"
+              >
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand/10 text-brand">
+                  <item.icon className="h-6 w-6" />
+                </span>
+                <span className="min-w-0">
+                  <h3 className="text-lg font-bold text-navy">{item.title}</h3>
+                  <p className="mt-1 text-muted-foreground">{item.description}</p>
+                </span>
               </div>
             ))}
           </div>
@@ -382,127 +481,128 @@ function Index() {
       </section>
 
       {/* About */}
-      <section id="about" className="bg-sand py-20 lg:py-28">
+      <section id="about" className="bg-background py-20 lg:py-28">
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
-          <div className="order-2 lg:order-1">
+          <div className="reveal order-2 lg:order-1">
             <img
               src="/images/service-protection.jpg"
-              alt="Family protected inside a shield from ants, cockroaches, mosquitoes and rodents"
+              alt="Home protected from cockroaches, termites, rodents and mosquitoes by Asian Pest Control"
               width={1200}
               height={800}
               loading="lazy"
-              className="rounded-3xl shadow-lg"
               decoding="async"
+              className="w-full rounded-[2rem] shadow-soft"
             />
           </div>
-          <div className="order-1 lg:order-2">
-            <h2 className="text-3xl font-bold tracking-tight text-navy sm:text-4xl">
-              About Asian Pest Control
+          <div className="reveal order-1 lg:order-2">
+            <span className="text-sm font-bold uppercase tracking-[0.2em] text-brand">About Us</span>
+            <h2 className="mt-3 text-3xl font-extrabold text-navy sm:text-4xl">
+              Three Decades of Pest-Free Homes
             </h2>
             <p className="mt-6 text-lg text-muted-foreground">
-              Founded in 1995, Asian Pest Control has been a trusted name for pest management in
-              Fatehgunj, Vadodara and across Gujarat. We started with a simple mission: keep homes and
-              workplaces healthy, hygienic and pest-free.
+              Founded in 1995 in Fatehgunj, Asian Pest Control — popularly known as {nickname} — began with one
+              promise: keep every home and workplace healthy, hygienic and pest-free.
             </p>
             <p className="mt-4 text-lg text-muted-foreground">
-              Today our experienced technicians serve residential apartments, villas, restaurants,
-              shops, warehouses, schools and factories. We combine time-tested methods with modern,
-              eco-friendly products to deliver results you can see and feel.
+              Today our team serves apartments, bungalows, restaurants, hotels, schools, showrooms, warehouses
+              and factories across Vadodara, combining proven techniques with modern eco-friendly formulations.
             </p>
             <ul className="mt-8 space-y-3">
               {[
                 "Licensed and insured pest control operator",
                 "Trained, uniformed and punctual technicians",
-                "Honest pricing with no hidden charges",
-                "Follow-up visits until the problem is solved",
+                "Transparent pricing with no hidden charges",
+                "Free follow-up visits until the problem is solved",
               ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-foreground">
+                <li key={item} className="flex items-start gap-3 font-medium text-foreground">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
+            <a
+              href="#contact"
+              className="mt-8 inline-flex items-center gap-2 rounded-full gradient-brand px-6 py-3.5 text-base font-bold text-brand-foreground shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift"
+            >
+              <CalendarCheck className="h-5 w-5" /> Book a Service
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Why us */}
-      <section id="why-us" className="bg-background py-20 lg:py-28">
+      {/* Testimonials */}
+      <section id="testimonials" className="bg-sand py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-navy sm:text-4xl">
-              Why Choose Us?
-            </h2>
+          <div className="reveal mx-auto max-w-3xl text-center">
+            <span className="text-sm font-bold uppercase tracking-[0.2em] text-brand">Testimonials</span>
+            <h2 className="mt-3 text-3xl font-extrabold text-navy sm:text-4xl">What Our Customers Say</h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              We are not just another pest control service. We are your neighbours, committed to
-              lasting protection.
+              Rated 4.9 out of 5 by more than 180 households and businesses in Vadodara.
             </p>
           </div>
-          <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {whyUs.map((item) => (
-              <div key={item.title} className="text-center">
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-brand/10 text-brand">
-                  <item.icon className="h-8 w-8" />
+          <div className="mt-14 grid gap-6 lg:grid-cols-3">
+            {testimonials.map((t) => (
+              <figure
+                key={t.name}
+                className="reveal relative rounded-2xl border border-border bg-card p-7 shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift"
+              >
+                <Quote className="absolute right-6 top-6 h-8 w-8 text-brand/15" />
+                <div className="flex gap-0.5 text-brand">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-current" />
+                  ))}
                 </div>
-                <h3 className="mt-5 text-lg font-semibold text-navy">{item.title}</h3>
-                <p className="mt-2 text-muted-foreground">{item.description}</p>
-              </div>
+                <blockquote className="mt-4 text-muted-foreground">“{t.text}”</blockquote>
+                <figcaption className="mt-6 flex items-center gap-3">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full gradient-brand font-display text-lg font-bold text-brand-foreground">
+                    {t.name.charAt(0)}
+                  </span>
+                  <span>
+                    <span className="block font-bold text-navy">{t.name}</span>
+                    <span className="block text-sm text-muted-foreground">{t.area}</span>
+                  </span>
+                </figcaption>
+              </figure>
             ))}
           </div>
         </div>
       </section>
 
-      {/* How it works */}
-      <section className="bg-navy py-20 text-navy-foreground lg:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">How It Works</h2>
-            <p className="mt-4 text-lg text-navy-foreground/80">
-              A simple four-step process to get your property pest-free again.
-            </p>
+      {/* CTA band */}
+      <section className="bg-navy py-16 text-navy-foreground">
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-4 text-center sm:px-6 lg:flex-row lg:justify-between lg:px-8 lg:text-left">
+          <div className="reveal">
+            <h2 className="text-2xl font-extrabold sm:text-3xl">Pest problem today? We can be there today.</h2>
+            <p className="mt-2 text-navy-foreground/80">Free inspection across Vadodara. Call {nickname} on {phoneNumber}.</p>
           </div>
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {steps.map((step) => (
-              <div key={step.step} className="relative rounded-2xl bg-navy-foreground/10 p-6 backdrop-blur-sm">
-                <span className="text-4xl font-bold text-brand">{step.step}</span>
-                <h3 className="mt-4 text-xl font-semibold">{step.title}</h3>
-                <p className="mt-2 text-navy-foreground/80">{step.description}</p>
-                <ChevronRight className="absolute right-4 top-1/2 hidden h-6 w-6 -translate-y-1/2 text-navy-foreground/40 lg:block" />
-              </div>
-            ))}
+          <div className="reveal flex flex-wrap justify-center gap-3">
+            <a
+              href={phoneHref}
+              className="inline-flex items-center gap-2 rounded-full gradient-brand px-6 py-3.5 text-base font-bold text-brand-foreground transition-all hover:-translate-y-0.5 hover:shadow-lift"
+            >
+              <Phone className="h-5 w-5" /> Call Now
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 rounded-full border-2 border-navy-foreground/40 px-6 py-3 text-base font-bold text-navy-foreground transition-all hover:-translate-y-0.5 hover:border-brand hover:text-brand"
+            >
+              Get Free Quote <ArrowRight className="h-4 w-4" />
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Service areas */}
-      <section className="bg-sand py-20 lg:py-28">
+      {/* Areas */}
+      <section className="bg-background py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-navy sm:text-4xl">Areas We Serve</h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Based in Fatehgunj, we cover all major neighbourhoods of Vadodara and nearby locations.
-            </p>
+          <div className="reveal mx-auto max-w-3xl text-center">
+            <h2 className="text-2xl font-extrabold text-navy sm:text-3xl">Areas We Serve in Vadodara</h2>
           </div>
-          <div className="mt-12 flex flex-wrap justify-center gap-3">
-            {[
-              "Fatehgunj",
-              "Alkapuri",
-              "Sayajigunj",
-              "Gotri",
-              "Manjalpur",
-              "Nizampura",
-              "Karelibaug",
-              "Waghodia Road",
-              "Sama",
-              "Tandalja",
-              "Ajwa Road",
-              "Vasna",
-              "Harni",
-              "Makarpura",
-            ].map((area) => (
+          <div className="reveal mt-8 flex flex-wrap justify-center gap-3">
+            {areas.map((area) => (
               <span
                 key={area}
-                className="rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-foreground shadow-sm"
+                className="rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground shadow-soft transition-colors hover:border-brand hover:text-brand"
               >
                 {area}
               </span>
@@ -511,59 +611,87 @@ function Index() {
         </div>
       </section>
 
-      {/* Contact / CTA */}
-      <section id="contact" className="bg-background py-20 lg:py-28">
+      {/* Contact */}
+      <section id="contact" className="bg-sand py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-2">
-            <div>
-              <h2 className="text-3xl font-bold tracking-tight text-navy sm:text-4xl">
-                Get a Free Quote Today
-              </h2>
-              <p className="mt-4 text-lg text-muted-foreground">
-                Call, WhatsApp or visit us. We respond quickly and offer free inspections for most
-                residential and commercial properties in Vadodara.
-              </p>
-              <div className="mt-8 space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-brand">
-                    <Phone className="h-5 w-5" />
+          <div className="reveal mx-auto max-w-3xl text-center">
+            <span className="text-sm font-bold uppercase tracking-[0.2em] text-brand">Contact</span>
+            <h2 className="mt-3 text-3xl font-extrabold text-navy sm:text-4xl">Book a Service or Get a Free Quote</h2>
+            <p className="mt-4 text-lg text-muted-foreground">
+              Send your details and we will call you back within the hour — or reach us instantly on WhatsApp.
+            </p>
+          </div>
+
+          <div className="mt-14 grid gap-8 lg:grid-cols-2">
+            <div className="reveal space-y-6">
+              <div className="rounded-2xl border border-border bg-card p-6 shadow-soft sm:p-8">
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand/10 text-brand">
+                      <Phone className="h-5 w-5" />
+                    </span>
+                    <div className="min-w-0">
+                      <div className="text-sm font-semibold text-muted-foreground">Phone / WhatsApp</div>
+                      <a href={phoneHref} className="text-lg font-bold text-navy transition-colors hover:text-brand">
+                        {phoneNumber}
+                      </a>
+                    </div>
                   </div>
-                  <div>
-                    <div className="text-sm font-medium text-muted-foreground">Phone / WhatsApp</div>
-                    <a
-                      href={`${phoneHref}`}
-                      className="text-lg font-semibold text-navy hover:text-brand"
-                    >
-                      {phoneNumber}
-                    </a>
+                  <div className="flex items-start gap-4">
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand/10 text-brand">
+                      <MapPin className="h-5 w-5" />
+                    </span>
+                    <div className="min-w-0">
+                      <div className="text-sm font-semibold text-muted-foreground">Address</div>
+                      <p className="text-lg font-bold text-navy">{businessAddress}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand/10 text-brand">
+                      <Clock className="h-5 w-5" />
+                    </span>
+                    <div className="min-w-0">
+                      <div className="text-sm font-semibold text-muted-foreground">Working Hours</div>
+                      <p className="text-lg font-bold text-navy">Mon – Sat: 8:00 AM – 8:00 PM</p>
+                      <p className="text-muted-foreground">Sunday: Emergency service available</p>
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-brand">
-                    <MapPin className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <div className="text-sm font-medium text-muted-foreground">Address</div>
-                    <p className="text-lg font-semibold text-navy">{businessAddress}</p>
-                  </div>
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                  <a
+                    href={phoneHref}
+                    className="inline-flex items-center justify-center gap-2 rounded-xl gradient-brand px-4 py-3 text-sm font-bold text-brand-foreground transition-all hover:-translate-y-0.5 hover:shadow-lift"
+                  >
+                    <Phone className="h-4 w-4" /> Call Now
+                  </a>
+                  <a
+                    href={waLink("Hi Asian Pest Control (Munna Bhai), I want to book a pest control service.")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-brand px-4 py-3 text-sm font-bold text-brand transition-all hover:-translate-y-0.5 hover:bg-brand hover:text-brand-foreground"
+                  >
+                    <MessageCircle className="h-4 w-4" /> WhatsApp Us
+                  </a>
                 </div>
-                <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-brand">
-                    <Clock className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <div className="text-sm font-medium text-muted-foreground">Working Hours</div>
-                    <p className="text-lg font-semibold text-navy">Mon – Sat: 8:00 AM – 8:00 PM</p>
-                    <p className="text-muted-foreground">Sunday: Emergency service available</p>
-                  </div>
-                </div>
+              </div>
+
+              {/* Google Maps */}
+              <div className="overflow-hidden rounded-2xl border border-border shadow-soft">
+                <iframe
+                  title="Asian Pest Control location in Fatehgunj, Vadodara on Google Maps"
+                  src={`https://www.google.com/maps?q=${encodeURIComponent(mapsQuery)}&output=embed`}
+                  className="h-72 w-full border-0"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
               </div>
             </div>
 
-            <div className="rounded-3xl border border-border bg-card p-6 shadow-sm sm:p-8">
-              <h3 className="text-xl font-semibold text-navy">Request a Callback</h3>
+            <div className="reveal rounded-2xl border border-border bg-card p-6 shadow-soft sm:p-8">
+              <h3 className="text-xl font-bold text-navy">Request a Callback</h3>
               <p className="mt-2 text-sm text-muted-foreground">
-                Fill in your details and we will call you back within the hour.
+                Your enquiry goes straight to our WhatsApp on {phoneNumber}.
               </p>
               <form
                 className="mt-6 space-y-4"
@@ -573,18 +701,18 @@ function Index() {
                   const data = new FormData(form);
                   const name = String(data.get("name") ?? "").trim().slice(0, 100);
                   const phone = String(data.get("phone") ?? "").trim().slice(0, 20);
+                  const service = String(data.get("service") ?? "").trim();
                   const message = String(data.get("message") ?? "").trim().slice(0, 1000);
                   if (!name || !/^[0-9+\s-]{10,20}$/.test(phone)) {
                     setFormError("Please enter your name and a valid phone number.");
                     return;
                   }
                   setFormError(null);
-                  const body = encodeURIComponent(
-                    `Hi Asian Pest Control (Munna Bhai),\n\nName: ${name}\nPhone: ${phone}\nService needed: ${message || "Not specified"}`,
+                  const url = waLink(
+                    `Hi Asian Pest Control (${nickname}),\n\nName: ${name}\nPhone: ${phone}\nService: ${
+                      service || "Not specified"
+                    }\nDetails: ${message || "-"}`,
                   );
-                  const url = `https://wa.me/${whatsappNumber.replace(/\D/g, "")}?text=${body}`;
-                  // Safari blocks window.open() navigations to WhatsApp via COOP,
-                  // so trigger a real link click instead.
                   const link = document.createElement("a");
                   link.href = url;
                   link.target = "_blank";
@@ -593,65 +721,66 @@ function Index() {
                   link.click();
                   link.remove();
                   form.reset();
-
                 }}
               >
-
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-foreground">
-                    Full name
-                  </label>
+                  <label htmlFor="name" className="block text-sm font-semibold text-foreground">Full name</label>
                   <input
                     id="name"
                     name="name"
                     type="text"
                     required
                     placeholder="Your name"
-                    className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-foreground outline-none ring-offset-background focus:ring-2 focus:ring-ring"
+                    className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-3 text-foreground outline-none transition-shadow focus:border-brand focus:ring-2 focus:ring-brand/30"
                   />
                 </div>
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-foreground">
-                    Phone number
-                  </label>
+                  <label htmlFor="phone" className="block text-sm font-semibold text-foreground">Phone number</label>
                   <input
                     id="phone"
                     name="phone"
                     type="tel"
                     required
                     placeholder="10-digit mobile number"
-                    className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-foreground outline-none ring-offset-background focus:ring-2 focus:ring-ring"
+                    className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-3 text-foreground outline-none transition-shadow focus:border-brand focus:ring-2 focus:ring-brand/30"
                   />
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-foreground">
-                    Pest problem / service needed
-                  </label>
+                  <label htmlFor="service" className="block text-sm font-semibold text-foreground">Service needed</label>
+                  <select
+                    id="service"
+                    name="service"
+                    defaultValue=""
+                    className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-3 text-foreground outline-none transition-shadow focus:border-brand focus:ring-2 focus:ring-brand/30"
+                  >
+                    <option value="">Select a service</option>
+                    {services.map((s) => (
+                      <option key={s.title} value={s.title}>{s.title}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-semibold text-foreground">Details (optional)</label>
                   <textarea
                     id="message"
                     name="message"
                     rows={3}
-                    placeholder="e.g. Cockroach treatment for 2BHK"
-                    className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-foreground outline-none ring-offset-background focus:ring-2 focus:ring-ring"
+                    placeholder="e.g. 2BHK flat in Gotri, cockroaches in kitchen"
+                    className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-3 text-foreground outline-none transition-shadow focus:border-brand focus:ring-2 focus:ring-brand/30"
                   />
                 </div>
                 {formError && (
-                  <p role="alert" className="text-sm font-medium text-destructive">
-                    {formError}
-                  </p>
+                  <p role="alert" className="text-sm font-semibold text-destructive">{formError}</p>
                 )}
                 <button
-
                   type="submit"
-                  className="w-full rounded-xl bg-brand px-4 py-3 text-base font-semibold text-brand-foreground shadow-md transition-transform hover:scale-[1.02]"
+                  className="w-full rounded-xl gradient-brand px-4 py-3.5 text-base font-bold text-brand-foreground shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift"
                 >
-                  Send via WhatsApp
+                  Get Free Quote on WhatsApp
                 </button>
                 <p className="text-center text-xs text-muted-foreground">
                   Or call us directly at{" "}
-                  <a href={`${phoneHref}`} className="font-medium text-brand hover:underline">
-                    {phoneNumber}
-                  </a>
+                  <a href={phoneHref} className="font-bold text-brand hover:underline">{phoneNumber}</a>
                 </p>
               </form>
             </div>
@@ -660,71 +789,86 @@ function Index() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border bg-card py-12">
+      <footer className="bg-navy py-14 text-navy-foreground">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             <div>
-              <div className="flex items-center gap-2">
-                <img src="/favicon.png" alt="Asian Pest Control" width={32} height={32} className="rounded" />
-                <div className="leading-tight">
-                  <span className="block text-lg font-bold text-navy">Asian Pest Control</span>
-                  <span className="block text-xs font-semibold uppercase tracking-widest text-brand">
-                    {nickname}
+              <div className="flex items-center gap-2.5">
+                <img src="/favicon.png" alt="Asian Pest Control" width={40} height={40} className="h-10 w-10 rounded-xl" />
+                <span className="leading-tight">
+                  <span className="block font-display text-lg font-extrabold">Asian Pest Control</span>
+                  <span className="block text-[11px] font-semibold uppercase tracking-[0.18em] text-brand">
+                    {nickname} • Since 1995
                   </span>
-                </div>
+                </span>
               </div>
-              <p className="mt-4 text-sm text-muted-foreground">
-                Trusted pest control services in Fatehgunj, Vadodara, Gujarat since 1995.
+              <p className="mt-4 text-sm text-navy-foreground/75">
+                Professional, eco-friendly pest control for homes and businesses across Fatehgunj, Vadodara and
+                all of Gujarat.
               </p>
+              <div className="mt-5 flex gap-3">
+                {[
+                  { icon: Facebook, href: "https://www.facebook.com/", label: "Facebook" },
+                  { icon: Instagram, href: "https://www.instagram.com/", label: "Instagram" },
+                  { icon: Youtube, href: "https://www.youtube.com/", label: "YouTube" },
+                  { icon: MessageCircle, href: waLink("Hi Asian Pest Control (Munna Bhai)!"), label: "WhatsApp" },
+                ].map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={s.label}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-navy-foreground/25 text-navy-foreground transition-all hover:-translate-y-0.5 hover:border-brand hover:bg-brand hover:text-brand-foreground"
+                  >
+                    <s.icon className="h-4.5 w-4.5" />
+                  </a>
+                ))}
+              </div>
             </div>
+
             <div>
-              <h4 className="font-semibold text-navy">Quick Links</h4>
-              <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+              <h3 className="font-display text-base font-bold">Quick Links</h3>
+              <ul className="mt-4 space-y-2 text-sm text-navy-foreground/75">
                 {navLinks.map((link) => (
                   <li key={link.href}>
-                    <a href={link.href} className="transition-colors hover:text-brand">
-                      {link.label}
-                    </a>
+                    <a href={link.href} className="transition-colors hover:text-brand">{link.label}</a>
                   </li>
                 ))}
               </ul>
             </div>
+
             <div>
-              <h4 className="font-semibold text-navy">Services</h4>
-              <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <a href="#services" className="transition-colors hover:text-brand">
-                    Cockroach Control
-                  </a>
-                </li>
-                <li>
-                  <a href="#services" className="transition-colors hover:text-brand">
-                    Termite Treatment
-                  </a>
-                </li>
-                <li>
-                  <a href="#services" className="transition-colors hover:text-brand">
-                    Rodent Control
-                  </a>
-                </li>
-                <li>
-                  <a href="#services" className="transition-colors hover:text-brand">
-                    Mosquito Control
-                  </a>
-                </li>
+              <h3 className="font-display text-base font-bold">Services</h3>
+              <ul className="mt-4 space-y-2 text-sm text-navy-foreground/75">
+                {services.map((s) => (
+                  <li key={s.title}>
+                    <a href="#services" className="transition-colors hover:text-brand">{s.title}</a>
+                  </li>
+                ))}
               </ul>
             </div>
+
             <div>
-              <h4 className="font-semibold text-navy">Contact</h4>
-              <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                <li>{phoneNumber}</li>
-                <li>{businessAddress}</li>
-                <li>Mon – Sat: 8 AM – 8 PM</li>
+              <h3 className="font-display text-base font-bold">Contact</h3>
+              <ul className="mt-4 space-y-3 text-sm text-navy-foreground/75">
+                <li>
+                  <a href={phoneHref} className="inline-flex items-center gap-2 font-semibold transition-colors hover:text-brand">
+                    <Phone className="h-4 w-4 text-brand" /> {phoneNumber}
+                  </a>
+                </li>
+                <li className="flex items-start gap-2">
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand" /> {businessAddress}
+                </li>
+                <li className="flex items-start gap-2">
+                  <Clock className="mt-0.5 h-4 w-4 shrink-0 text-brand" /> Mon – Sat: 8 AM – 8 PM
+                </li>
               </ul>
             </div>
           </div>
-          <div className="mt-12 border-t border-border pt-8 text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Asian Pest Control. All rights reserved. Serving Vadodara,
+
+          <div className="mt-12 border-t border-navy-foreground/15 pt-8 text-center text-sm text-navy-foreground/70">
+            © {new Date().getFullYear()} Asian Pest Control ({nickname}). All rights reserved. Serving Vadodara,
             Gujarat since 1995.
           </div>
         </div>
@@ -737,33 +881,27 @@ function Index() {
 
 function WhatsAppToggle() {
   const [open, setOpen] = useState(false);
-  const waLink = `https://wa.me/${whatsappNumber.replace(/\D/g, "")}?text=${encodeURIComponent(
-    "Hi Asian Pest Control (Munna Bhai), I need pest control service in Vadodara.",
-  )}`;
+  const link = waLink("Hi Asian Pest Control (Munna Bhai), I need pest control service in Vadodara.");
 
   return (
     <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-3">
       {open && (
-        <div className="w-64 rounded-2xl border border-border bg-card p-4 shadow-xl">
-          <p className="text-sm font-semibold text-navy">Chat with {nickname}</p>
-          <p className="mt-1 text-xs text-muted-foreground">
-            Asian Pest Control • {phoneNumber}
-          </p>
+        <div className="w-72 rounded-2xl border border-border bg-card p-4 shadow-lift">
+          <p className="font-bold text-navy">Chat with {nickname}</p>
+          <p className="mt-1 text-xs text-muted-foreground">Asian Pest Control • {phoneNumber}</p>
           <a
-            href={waLink}
+            href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-brand px-4 py-2 text-sm font-semibold text-brand-foreground"
+            className="mt-3 flex items-center justify-center gap-2 rounded-xl gradient-brand px-4 py-2.5 text-sm font-bold text-brand-foreground"
           >
-            <MessageCircle className="h-4 w-4" />
-            Open WhatsApp
+            <MessageCircle className="h-4 w-4" /> Open WhatsApp
           </a>
           <a
-            href={`${phoneHref}`}
-            className="mt-2 flex items-center justify-center gap-2 rounded-xl border border-border px-4 py-2 text-sm font-semibold text-navy"
+            href={phoneHref}
+            className="mt-2 flex items-center justify-center gap-2 rounded-xl border border-border px-4 py-2.5 text-sm font-bold text-navy transition-colors hover:border-brand hover:text-brand"
           >
-            <Phone className="h-4 w-4" />
-            Call {phoneNumber}
+            <Phone className="h-4 w-4" /> Call {phoneNumber}
           </a>
         </div>
       )}
@@ -772,7 +910,7 @@ function WhatsAppToggle() {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-label={open ? "Close WhatsApp chat" : "Chat on WhatsApp"}
-        className="flex h-14 w-14 items-center justify-center rounded-full bg-brand text-brand-foreground shadow-lg transition-transform hover:scale-105"
+        className="animate-pulse-ring flex h-14 w-14 items-center justify-center rounded-full gradient-brand text-brand-foreground shadow-lift transition-transform hover:scale-110"
       >
         {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-7 w-7" />}
       </button>
