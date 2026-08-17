@@ -1,14 +1,18 @@
-# Welcome to your Lovable project
+# Asian Pest Control Vadodara
+
+I want to make an website of pest control in india fatehgunj Vadodara Gujarat for my business name is asian pest control since 1995 please make it
 
 This project was built with [Lovable](https://lovable.dev).
 
+**Live app**: https://pest-free-gujarat.lovable.app
+
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/54f13ee3-bf4d-4242-a0fc-09e3186cf1d3).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +24,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
