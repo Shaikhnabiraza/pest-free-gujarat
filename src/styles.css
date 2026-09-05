@@ -177,16 +177,47 @@
   box-shadow: var(--shadow-lift);
 }
 
-/* Scroll reveal */
+/* Scroll reveal — soft spring rise with blur */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
+  transform: translateY(34px) scale(0.97);
+  filter: blur(6px);
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform, filter;
 }
 
 .reveal.is-visible {
   opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Directional variants */
+.reveal-left {
+  transform: translateX(-48px) scale(0.98);
+}
+
+.reveal-right {
+  transform: translateX(48px) scale(0.98);
+}
+
+.reveal-zoom {
+  transform: scale(0.88);
+}
+
+.reveal-flip {
+  transform: perspective(900px) rotateX(10deg) translateY(30px);
+  transform-origin: center top;
+}
+
+.reveal-left.is-visible,
+.reveal-right.is-visible,
+.reveal-zoom.is-visible,
+.reveal-flip.is-visible {
   transform: none;
 }
 
@@ -276,5 +307,5 @@
   .spray-mist,
   .animate-float-soft,
   .animate-pulse-ring { animation: none; }
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal { opacity: 1; transform: none; filter: none; transition: none; }
 }

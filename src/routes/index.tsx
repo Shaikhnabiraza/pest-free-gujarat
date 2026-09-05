@@ -194,6 +194,20 @@ function useScrollReveal() {
       els.forEach((el) => el.classList.add("is-visible"));
       return;
     }
+    // Stagger siblings: each .reveal gets a delay based on its position
+    // among .reveal siblings within the same parent.
+    const groups = new Map<Element, HTMLElement[]>();
+    els.forEach((el) => {
+      const parent = el.parentElement ?? el;
+      const list = groups.get(parent) ?? [];
+      list.push(el);
+      groups.set(parent, list);
+    });
+    groups.forEach((list) => {
+      list.forEach((el, i) => {
+        if (i > 0) el.style.setProperty("--reveal-delay", `${Math.min(i, 6) * 110}ms`);
+      });
+    });
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -203,7 +217,7 @@ function useScrollReveal() {
           }
         });
       },
-      { rootMargin: "0px 0px -10% 0px", threshold: 0.08 },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.06 },
     );
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
@@ -485,7 +499,8 @@ function Index() {
       {/* About */}
       <section id="about" className="bg-background py-20 lg:py-28">
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
-          <div className="reveal order-2 lg:order-1">
+          <div className="reveal reveal-left order-2 lg:order-1">
+
             <img
               src="/images/service-protection.jpg"
               alt="Home protected from cockroaches, termites, rodents and mosquitoes by Asian Pest Control"
@@ -496,7 +511,7 @@ function Index() {
               className="w-full rounded-[2rem] shadow-soft"
             />
           </div>
-          <div className="reveal order-1 lg:order-2">
+          <div className="reveal reveal-right order-1 lg:order-2">
             <span className="text-sm font-bold uppercase tracking-[0.2em] text-brand">About Us</span>
             <h2 className="mt-3 text-3xl font-extrabold text-navy sm:text-4xl">
               Three Decades of Pest-Free Homes
