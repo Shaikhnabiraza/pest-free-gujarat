@@ -511,7 +511,7 @@ function Index() {
               className="w-full rounded-[2rem] shadow-soft"
             />
           </div>
-          <div className="reveal order-1 lg:order-2">
+          <div className="reveal reveal-right order-1 lg:order-2">
             <span className="text-sm font-bold uppercase tracking-[0.2em] text-brand">About Us</span>
             <h2 className="mt-3 text-3xl font-extrabold text-navy sm:text-4xl">
               Three Decades of Pest-Free Homes
