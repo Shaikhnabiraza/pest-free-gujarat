@@ -194,6 +194,20 @@ function useScrollReveal() {
       els.forEach((el) => el.classList.add("is-visible"));
       return;
     }
+    // Stagger siblings: each .reveal gets a delay based on its position
+    // among .reveal siblings within the same parent.
+    const groups = new Map<Element, HTMLElement[]>();
+    els.forEach((el) => {
+      const parent = el.parentElement ?? el;
+      const list = groups.get(parent) ?? [];
+      list.push(el);
+      groups.set(parent, list);
+    });
+    groups.forEach((list) => {
+      list.forEach((el, i) => {
+        if (i > 0) el.style.setProperty("--reveal-delay", `${Math.min(i, 6) * 110}ms`);
+      });
+    });
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -203,7 +217,7 @@ function useScrollReveal() {
           }
         });
       },
-      { rootMargin: "0px 0px -10% 0px", threshold: 0.08 },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.06 },
     );
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
