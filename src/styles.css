@@ -307,5 +307,5 @@
   .spray-mist,
   .animate-float-soft,
   .animate-pulse-ring { animation: none; }
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal { opacity: 1; transform: none; filter: none; transition: none; }
 }

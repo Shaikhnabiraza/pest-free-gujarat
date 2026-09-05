@@ -499,7 +499,8 @@ function Index() {
       {/* About */}
       <section id="about" className="bg-background py-20 lg:py-28">
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
-          <div className="reveal order-2 lg:order-1">
+          <div className="reveal reveal-left order-2 lg:order-1">
+
             <img
               src="/images/service-protection.jpg"
               alt="Home protected from cockroaches, termites, rodents and mosquitoes by Asian Pest Control"
