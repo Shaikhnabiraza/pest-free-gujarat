@@ -27,6 +27,8 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
+import { GoogleReviews } from "../components/GoogleReviews";
+
 const siteUrl = "https://pest-free-gujarat.lovable.app";
 
 export const Route = createFileRoute("/")({
@@ -115,7 +117,7 @@ const navLinks = [
   { label: "Services", href: "#services" },
   { label: "Why Us", href: "#why-us" },
   { label: "About", href: "#about" },
-  { label: "Reviews", href: "#testimonials" },
+  { label: "Reviews", href: "#google-reviews" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -567,6 +569,8 @@ function Index() {
           </div>
         </div>
       </section>
+
+      <GoogleReviews />
 
       {/* CTA band */}
       <section className="bg-navy py-16 text-navy-foreground">
