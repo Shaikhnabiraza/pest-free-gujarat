@@ -28,6 +28,7 @@ import {
 import { useState, useEffect } from "react";
 
 import { GoogleReviews } from "../components/GoogleReviews";
+import { ThemeToggle } from "../components/ThemeToggle";
 
 const siteUrl = "https://pest-free-gujarat.lovable.app";
 
