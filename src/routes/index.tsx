@@ -314,6 +314,7 @@ function Index() {
                 {link.label}
               </a>
             ))}
+            <ThemeToggle />
             <a
               href={phoneHref}
               className="inline-flex items-center gap-2 rounded-full gradient-brand px-5 py-2.5 text-sm font-bold text-brand-foreground shadow-soft transition-all hover:shadow-lift hover:brightness-105"
