@@ -975,7 +975,12 @@ function Index() {
       </footer>
 
       <WhatsAppToggle />
-      <Lightbox index={lightboxIndex} onClose={() => setLightboxIndex(null)} />
+      <Lightbox
+        index={lightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+        onPrev={() => setLightboxIndex((i) => (i === null || i <= 0 ? galleryImages.length - 1 : i - 1))}
+        onNext={() => setLightboxIndex((i) => (i === null || i >= galleryImages.length - 1 ? 0 : i + 1))}
+      />
     </div>
   );
 }
