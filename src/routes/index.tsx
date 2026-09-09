@@ -592,6 +592,42 @@ function Index() {
         </div>
       </section>
 
+      {/* Gallery */}
+      <section id="gallery" className="bg-sand py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="reveal mx-auto max-w-3xl text-center">
+            <span className="text-sm font-bold uppercase tracking-[0.2em] text-brand">Our Work</span>
+            <h2 className="mt-3 text-3xl font-extrabold text-navy sm:text-4xl">See Our Pest Control Services in Action</h2>
+            <p className="mt-4 text-lg text-muted-foreground">
+              Real treatments, trained technicians and lasting results across Vadodara homes and businesses.
+            </p>
+          </div>
+          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {galleryImages.map((img, i) => (
+              <button
+                key={img.src}
+                type="button"
+                onClick={() => setLightboxIndex(i)}
+                className="reveal group relative overflow-hidden rounded-2xl border border-border bg-card text-left shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2"
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  width={600}
+                  height={400}
+                  loading="lazy"
+                  decoding="async"
+                  className="aspect-[3/2] w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/80 to-transparent p-4 pt-12 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <span className="block font-bold text-white">{img.title}</span>
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials */}
       <section id="testimonials" className="bg-sand py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
