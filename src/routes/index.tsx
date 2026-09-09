@@ -975,6 +975,7 @@ function Index() {
       </footer>
 
       <WhatsAppToggle />
+      <Lightbox index={lightboxIndex} onClose={() => setLightboxIndex(null)} />
     </div>
   );
 }
