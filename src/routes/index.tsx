@@ -1018,3 +1018,77 @@ function WhatsAppToggle() {
     </div>
   );
 }
+
+function Lightbox({ index, onClose }: { index: number | null; onClose: () => void }) {
+  useEffect(() => {
+    if (index === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") {
+        setLightboxIndex?.((i) => (i === null || i <= 0 ? galleryImages.length - 1 : i - 1));
+      }
+      if (e.key === "ArrowRight") {
+        setLightboxIndex?.((i) => (i === null || i >= galleryImages.length - 1 ? 0 : i + 1));
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [index, onClose]);
+  if (index === null) return null;
+  const img = galleryImages[index];
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-navy/95 p-4 backdrop-blur-sm"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Image preview"
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        className="absolute right-4 top-4 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20"
+        aria-label="Close image preview"
+      >
+        <X className="h-6 w-6" />
+      </button>
+      <button
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          const prev = index <= 0 ? galleryImages.length - 1 : index - 1;
+          // Handled by parent state; we close and let parent reopen is awkward, so we mutate via DOM for simplicity
+          window.dispatchEvent(new CustomEvent("lightbox-nav", { detail: prev }));
+        }}
+        className="absolute left-4 top-1/2 hidden -translate-y-1/2 rounded-full bg-white/10 p-3 text-white transition-colors hover:bg-white/20 sm:block"
+        aria-label="Previous image"
+      >
+        <ArrowRight className="h-6 w-6 rotate-180" />
+      </button>
+      <button
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          const next = index >= galleryImages.length - 1 ? 0 : index + 1;
+          window.dispatchEvent(new CustomEvent("lightbox-nav", { detail: next }));
+        }}
+        className="absolute right-4 top-1/2 hidden -translate-y-1/2 rounded-full bg-white/10 p-3 text-white transition-colors hover:bg-white/20 sm:block"
+        aria-label="Next image"
+      >
+        <ArrowRight className="h-6 w-6" />
+      </button>
+      <div className="max-h-[85vh] max-w-5xl" onClick={(e) => e.stopPropagation()}>
+        <img
+          src={img.src}
+          alt={img.alt}
+          className="max-h-[80vh] w-auto rounded-2xl object-contain shadow-lift"
+        />
+        <p className="mt-3 text-center font-bold text-white">{img.title}</p>
+      </div>
+    </div>
+  );
+}
