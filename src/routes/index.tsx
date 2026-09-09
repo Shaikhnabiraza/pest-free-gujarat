@@ -1024,17 +1024,23 @@ function WhatsAppToggle() {
   );
 }
 
-function Lightbox({ index, onClose }: { index: number | null; onClose: () => void }) {
+function Lightbox({
+  index,
+  onClose,
+  onPrev,
+  onNext,
+}: {
+  index: number | null;
+  onClose: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+}) {
   useEffect(() => {
     if (index === null) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
-      if (e.key === "ArrowLeft") {
-        setLightboxIndex?.((i) => (i === null || i <= 0 ? galleryImages.length - 1 : i - 1));
-      }
-      if (e.key === "ArrowRight") {
-        setLightboxIndex?.((i) => (i === null || i >= galleryImages.length - 1 ? 0 : i + 1));
-      }
+      if (e.key === "ArrowLeft") onPrev();
+      if (e.key === "ArrowRight") onNext();
     };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
@@ -1042,9 +1048,10 @@ function Lightbox({ index, onClose }: { index: number | null; onClose: () => voi
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
-  }, [index, onClose]);
+  }, [index, onClose, onPrev, onNext]);
   if (index === null) return null;
   const img = galleryImages[index];
+  if (!img) return null;
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-navy/95 p-4 backdrop-blur-sm"
@@ -1065,9 +1072,7 @@ function Lightbox({ index, onClose }: { index: number | null; onClose: () => voi
         type="button"
         onClick={(e) => {
           e.stopPropagation();
-          const prev = index <= 0 ? galleryImages.length - 1 : index - 1;
-          // Handled by parent state; we close and let parent reopen is awkward, so we mutate via DOM for simplicity
-          window.dispatchEvent(new CustomEvent("lightbox-nav", { detail: prev }));
+          onPrev();
         }}
         className="absolute left-4 top-1/2 hidden -translate-y-1/2 rounded-full bg-white/10 p-3 text-white transition-colors hover:bg-white/20 sm:block"
         aria-label="Previous image"
@@ -1078,8 +1083,7 @@ function Lightbox({ index, onClose }: { index: number | null; onClose: () => voi
         type="button"
         onClick={(e) => {
           e.stopPropagation();
-          const next = index >= galleryImages.length - 1 ? 0 : index + 1;
-          window.dispatchEvent(new CustomEvent("lightbox-nav", { detail: next }));
+          onNext();
         }}
         className="absolute right-4 top-1/2 hidden -translate-y-1/2 rounded-full bg-white/10 p-3 text-white transition-colors hover:bg-white/20 sm:block"
         aria-label="Next image"
