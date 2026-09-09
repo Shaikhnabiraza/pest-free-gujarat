@@ -117,8 +117,52 @@ const navLinks = [
   { label: "Services", href: "#services" },
   { label: "Why Us", href: "#why-us" },
   { label: "About", href: "#about" },
+  { label: "Gallery", href: "#gallery" },
   { label: "Reviews", href: "#google-reviews" },
   { label: "Contact", href: "#contact" },
+];
+
+const galleryImages = [
+  {
+    src: "/images/hero-pest-control.jpg",
+    alt: "Asian Pest Control technician treating a home in Vadodara, Gujarat",
+    title: "Home Pest Treatment",
+  },
+  {
+    src: "/images/cockroach-control.jpg",
+    alt: "Cockroach gel baiting treatment in a modern kitchen",
+    title: "Cockroach Control",
+  },
+  {
+    src: "/images/termite-treatment.jpg",
+    alt: "Anti-termite drilling and chemical injection at a construction site",
+    title: "Termite Treatment",
+  },
+  {
+    src: "/images/bed-bug-treatment.jpg",
+    alt: "Bed bug inspection and treatment on a mattress",
+    title: "Bed Bug Treatment",
+  },
+  {
+    src: "/images/rodent-control.jpg",
+    alt: "Safe rodent control in a commercial kitchen storage area",
+    title: "Rodent Control",
+  },
+  {
+    src: "/images/mosquito-fogging.jpg",
+    alt: "Outdoor mosquito fogging in a residential garden",
+    title: "Mosquito Fogging",
+  },
+  {
+    src: "/images/team-service-van.jpg",
+    alt: "Asian Pest Control service team and van in Vadodara",
+    title: "Our Service Team",
+  },
+  {
+    src: "/images/service-protection.jpg",
+    alt: "Home protected from cockroaches, termites, rodents and mosquitoes",
+    title: "Complete Protection",
+  },
 ];
 
 const services = [
