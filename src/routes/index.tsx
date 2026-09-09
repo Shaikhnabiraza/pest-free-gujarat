@@ -117,8 +117,52 @@ const navLinks = [
   { label: "Services", href: "#services" },
   { label: "Why Us", href: "#why-us" },
   { label: "About", href: "#about" },
+  { label: "Gallery", href: "#gallery" },
   { label: "Reviews", href: "#google-reviews" },
   { label: "Contact", href: "#contact" },
+];
+
+const galleryImages = [
+  {
+    src: "/images/hero-pest-control.jpg",
+    alt: "Asian Pest Control technician treating a home in Vadodara, Gujarat",
+    title: "Home Pest Treatment",
+  },
+  {
+    src: "/images/cockroach-control.jpg",
+    alt: "Cockroach gel baiting treatment in a modern kitchen",
+    title: "Cockroach Control",
+  },
+  {
+    src: "/images/termite-treatment.jpg",
+    alt: "Anti-termite drilling and chemical injection at a construction site",
+    title: "Termite Treatment",
+  },
+  {
+    src: "/images/bed-bug-treatment.jpg",
+    alt: "Bed bug inspection and treatment on a mattress",
+    title: "Bed Bug Treatment",
+  },
+  {
+    src: "/images/rodent-control.jpg",
+    alt: "Safe rodent control in a commercial kitchen storage area",
+    title: "Rodent Control",
+  },
+  {
+    src: "/images/mosquito-fogging.jpg",
+    alt: "Outdoor mosquito fogging in a residential garden",
+    title: "Mosquito Fogging",
+  },
+  {
+    src: "/images/team-service-van.jpg",
+    alt: "Asian Pest Control service team and van in Vadodara",
+    title: "Our Service Team",
+  },
+  {
+    src: "/images/service-protection.jpg",
+    alt: "Home protected from cockroaches, termites, rodents and mosquitoes",
+    title: "Complete Protection",
+  },
 ];
 
 const services = [
@@ -228,6 +272,7 @@ function Index() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   useScrollReveal();
 
   useEffect(() => {
@@ -543,6 +588,42 @@ function Index() {
             >
               <CalendarCheck className="h-5 w-5" /> Book a Service
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery */}
+      <section id="gallery" className="bg-sand py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="reveal mx-auto max-w-3xl text-center">
+            <span className="text-sm font-bold uppercase tracking-[0.2em] text-brand">Our Work</span>
+            <h2 className="mt-3 text-3xl font-extrabold text-navy sm:text-4xl">See Our Pest Control Services in Action</h2>
+            <p className="mt-4 text-lg text-muted-foreground">
+              Real treatments, trained technicians and lasting results across Vadodara homes and businesses.
+            </p>
+          </div>
+          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {galleryImages.map((img, i) => (
+              <button
+                key={img.src}
+                type="button"
+                onClick={() => setLightboxIndex(i)}
+                className="reveal group relative overflow-hidden rounded-2xl border border-border bg-card text-left shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2"
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  width={600}
+                  height={400}
+                  loading="lazy"
+                  decoding="async"
+                  className="aspect-[3/2] w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/80 to-transparent p-4 pt-12 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <span className="block font-bold text-white">{img.title}</span>
+                </span>
+              </button>
+            ))}
           </div>
         </div>
       </section>
@@ -894,6 +975,12 @@ function Index() {
       </footer>
 
       <WhatsAppToggle />
+      <Lightbox
+        index={lightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+        onPrev={() => setLightboxIndex((i) => (i === null || i <= 0 ? galleryImages.length - 1 : i - 1))}
+        onNext={() => setLightboxIndex((i) => (i === null || i >= galleryImages.length - 1 ? 0 : i + 1))}
+      />
     </div>
   );
 }
@@ -933,6 +1020,84 @@ function WhatsAppToggle() {
       >
         {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-7 w-7" />}
       </button>
+    </div>
+  );
+}
+
+function Lightbox({
+  index,
+  onClose,
+  onPrev,
+  onNext,
+}: {
+  index: number | null;
+  onClose: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+}) {
+  useEffect(() => {
+    if (index === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") onPrev();
+      if (e.key === "ArrowRight") onNext();
+    };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [index, onClose, onPrev, onNext]);
+  if (index === null) return null;
+  const img = galleryImages[index];
+  if (!img) return null;
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-navy/95 p-4 backdrop-blur-sm"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Image preview"
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        className="absolute right-4 top-4 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20"
+        aria-label="Close image preview"
+      >
+        <X className="h-6 w-6" />
+      </button>
+      <button
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          onPrev();
+        }}
+        className="absolute left-4 top-1/2 hidden -translate-y-1/2 rounded-full bg-white/10 p-3 text-white transition-colors hover:bg-white/20 sm:block"
+        aria-label="Previous image"
+      >
+        <ArrowRight className="h-6 w-6 rotate-180" />
+      </button>
+      <button
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          onNext();
+        }}
+        className="absolute right-4 top-1/2 hidden -translate-y-1/2 rounded-full bg-white/10 p-3 text-white transition-colors hover:bg-white/20 sm:block"
+        aria-label="Next image"
+      >
+        <ArrowRight className="h-6 w-6" />
+      </button>
+      <div className="max-h-[85vh] max-w-5xl" onClick={(e) => e.stopPropagation()}>
+        <img
+          src={img.src}
+          alt={img.alt}
+          className="max-h-[80vh] w-auto rounded-2xl object-contain shadow-lift"
+        />
+        <p className="mt-3 text-center font-bold text-white">{img.title}</p>
+      </div>
     </div>
   );
 }
