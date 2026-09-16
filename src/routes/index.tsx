@@ -440,7 +440,7 @@ function Index() {
             </dl>
           </div>
 
-          <div className="reveal relative">
+          <div className="reveal relative mx-auto mt-12 max-w-3xl">
             <div aria-hidden="true" className="absolute inset-0 -z-10 translate-x-4 translate-y-4 rounded-[2rem] gradient-brand opacity-20" />
             <img
               src="/images/hero-pest-control.jpg"
