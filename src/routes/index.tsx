@@ -404,7 +404,7 @@ function Index() {
               offices, restaurants and factories across Vadodara for over 30 years. Government-approved chemicals,
               trained technicians and a written service warranty on every treatment.
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <a
                 href={phoneHref}
                 className="inline-flex items-center gap-2 rounded-full gradient-brand px-6 py-3.5 text-base font-bold text-brand-foreground shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift"
