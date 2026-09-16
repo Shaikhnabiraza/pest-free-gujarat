@@ -283,9 +283,9 @@
 
 
 @media (prefers-reduced-motion: reduce) {
-  .spray-cursor-jet,
-  .spray-mist,
+  .spray-cursor svg { transition: none; }
   .animate-float-soft,
+
   .animate-pulse-ring { animation: none; }
   .reveal { opacity: 1; transform: none; filter: none; transition: none; }
 }
