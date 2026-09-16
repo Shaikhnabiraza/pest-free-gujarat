@@ -383,18 +383,19 @@ function Index() {
           aria-hidden="true"
           className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-brand/10 blur-3xl"
         />
-        <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 pb-16 sm:px-6 lg:grid-cols-2 lg:px-8 lg:pb-24">
-          <div className="reveal max-w-2xl">
+        <div className="mx-auto max-w-4xl px-4 pb-16 text-center sm:px-6 lg:pb-24">
+          <div className="reveal">
             <div className="inline-flex items-center gap-2 rounded-full border border-brand/25 bg-card px-4 py-1.5 text-sm font-semibold text-brand shadow-soft">
               <span className="h-2 w-2 animate-pulse rounded-full bg-brand" />
               Trusted in Fatehgunj, Vadodara since 1995
             </div>
-            <h1 className="mt-6 text-4xl font-extrabold leading-[1.05] text-navy sm:text-5xl lg:text-[3.5rem]">
+            <h1 className="mt-6 text-3xl font-extrabold leading-[1.12] text-navy sm:text-4xl lg:text-[2.9rem]">
               Professional Pest Control Services{" "}
               <span className="bg-gradient-to-r from-brand to-brand-dark bg-clip-text text-transparent">
                 You Can Trust
-              </span>
-              <span className="mt-2 block bg-gradient-to-r from-brand to-brand-dark bg-clip-text text-transparent">
+              </span>{" "}
+              —{" "}
+              <span className="bg-gradient-to-r from-brand to-brand-dark bg-clip-text text-transparent">
                 Termite Specialists, Trusted by Customers
               </span>
             </h1>
