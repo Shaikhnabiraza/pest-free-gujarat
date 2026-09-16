@@ -82,7 +82,7 @@ export const Route = createFileRoute("/")({
     };
     const title = "Professional Pest Control in Vadodara | Asian Pest Control Since 1995";
     const description =
-      "Asian Pest Control (Munna Bhai) offers professional cockroach, termite, bed bug, rodent and mosquito control in Fatehgunj, Vadodara. Safe, eco-friendly, since 1995. Call 99981 79902.";
+      "Asian Pest Control (Munna Bhai) offers professional cockroach, termite, bed bug, rodent and mosquito control in Fatehgunj, Vadodara. Termite specialists with a 5 years guarantee. Safe, eco-friendly, since 1995. Call 99981 79902.";
     return {
       meta: [
         { title },
