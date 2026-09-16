@@ -83,7 +83,7 @@ export function SprayCursor() {
           strokeLinejoin="round"
         />
       </svg>
-et    </div>
+</div>
   );
 }
 
