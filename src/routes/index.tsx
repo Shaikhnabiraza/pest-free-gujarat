@@ -82,7 +82,7 @@ export const Route = createFileRoute("/")({
     };
     const title = "Professional Pest Control in Vadodara | Asian Pest Control Since 1995";
     const description =
-      "Asian Pest Control (Munna Bhai) offers professional cockroach, termite, bed bug, rodent and mosquito control in Fatehgunj, Vadodara. Safe, eco-friendly, since 1995. Call 99981 79902.";
+      "Asian Pest Control (Munna Bhai) offers professional cockroach, termite, bed bug, rodent and mosquito control in Fatehgunj, Vadodara. Termite specialists with a 5 years guarantee. Safe, eco-friendly, since 1995. Call 99981 79902.";
     return {
       meta: [
         { title },
@@ -180,7 +180,7 @@ const services = [
   },
   {
     title: "Termite Control",
-    description: "Pre and post-construction anti-termite treatment with drilling, injection and warranty.",
+    description: "Pre and post-construction anti-termite treatment with drilling, injection and a 5 years guarantee.",
     icon: Hammer,
   },
   {
@@ -210,7 +210,7 @@ const whyUs = [
   { title: "Certified Technicians", description: "Trained, uniformed and background-verified pest management professionals.", icon: Award },
   { title: "Family & Pet Safe", description: "Government-approved, low-odour chemicals that are safe around kids and pets.", icon: Leaf },
   { title: "Free Inspection", description: "Honest on-site assessment and transparent pricing before any work starts.", icon: Sprout },
-  { title: "Service Warranty", description: "Written warranty with free follow-up visits until the pests are gone.", icon: ShieldCheck },
+  { title: "Service Warranty", description: "Written warranty with free follow-up visits — including a 5 years guarantee on termite treatment.", icon: ShieldCheck },
   { title: "Same-Day Response", description: "Local Fatehgunj team reaching most Vadodara areas within hours.", icon: Users },
 ];
 
@@ -394,6 +394,9 @@ function Index() {
               <span className="bg-gradient-to-r from-brand to-brand-dark bg-clip-text text-transparent">
                 You Can Trust
               </span>
+              <span className="mt-2 block bg-gradient-to-r from-brand to-brand-dark bg-clip-text text-transparent">
+                Termite Specialists, Trusted by Customers
+              </span>
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
               Asian Pest Control, known locally as <strong className="text-navy">{nickname}</strong>, has protected homes,
@@ -453,8 +456,8 @@ function Index() {
                   <ShieldCheck className="h-6 w-6" />
                 </span>
                 <span>
-                  <span className="block text-sm font-bold text-navy">Warranty Backed</span>
-                  <span className="block text-xs text-muted-foreground">Free follow-up visits</span>
+                  <span className="block text-sm font-bold text-navy">5-Year Termite Guarantee</span>
+                  <span className="block text-xs text-muted-foreground">Written warranty on every termite job</span>
                 </span>
               </div>
             </div>
@@ -464,12 +467,13 @@ function Index() {
 
       {/* Trust strip */}
       <section className="border-y border-border bg-card">
-        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-4 py-8 text-center sm:grid-cols-4 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-4 py-8 text-center sm:grid-cols-3 sm:px-6 lg:grid-cols-5 lg:px-8">
           {[
             { icon: ShieldCheck, label: "Government Approved" },
             { icon: Leaf, label: "Eco-Friendly Products" },
             { icon: Clock, label: "Same-Day Service" },
             { icon: Award, label: "30+ Years Trusted" },
+            { icon: Hammer, label: "5-Year Termite Guarantee" },
           ].map((b) => (
             <div key={b.label} className="reveal group flex flex-col items-center gap-2">
               <b.icon className="h-8 w-8 text-brand transition-transform group-hover:scale-110" />
