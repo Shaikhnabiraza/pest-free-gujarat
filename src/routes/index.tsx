@@ -12,7 +12,9 @@ import {
   Award,
   Users,
   Leaf,
+  Mail,
   Menu,
+
   X,
   ArrowRight,
   MessageCircle,
@@ -40,7 +42,9 @@ export const Route = createFileRoute("/")({
       "@type": "PestControlService",
       name: "Asian Pest Control (Munna Bhai)",
       image: `${siteUrl}/images/hero-pest-control.jpg`,
+      email: "asianpestcontrol.apc@gmail.com",
       telephone: "+91-99981-79902",
+
       address: {
         "@type": "PostalAddress",
         streetAddress: "Near Fatehgunj Main Road",
@@ -109,6 +113,8 @@ const phoneHref = "tel:+919998179902";
 const nickname = "Munna Bhai";
 const waDigits = "919998179902";
 const businessAddress = "Near Fatehgunj Main Road, Fatehgunj, Vadodara, Gujarat 390002";
+const email = "asianpestcontrol.apc@gmail.com";
+
 const mapsQuery = "Fatehgunj,Vadodara,Gujarat";
 
 const waLink = (msg: string) => `https://wa.me/${waDigits}?text=${encodeURIComponent(msg)}`;
@@ -744,6 +750,21 @@ function Index() {
                   </div>
                   <div className="flex items-start gap-4">
                     <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand/10 text-brand">
+                      <Mail className="h-5 w-5" />
+                    </span>
+                    <div className="min-w-0 break-all">
+                      <div className="text-sm font-semibold text-muted-foreground">Email</div>
+                      <a
+                        href={`mailto:${email}`}
+                        className="text-lg font-bold text-navy transition-colors hover:text-brand"
+                      >
+                        {email}
+                      </a>
+                    </div>
+
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand/10 text-brand">
                       <MapPin className="h-5 w-5" />
                     </span>
                     <div className="min-w-0">
@@ -962,6 +983,15 @@ function Index() {
                     <Phone className="h-4 w-4 text-brand" /> {phoneNumber}
                   </a>
                 </li>
+                <li>
+                  <a
+                    href={`mailto:${email}`}
+                    className="inline-flex items-center gap-2 break-all font-semibold transition-colors hover:text-brand"
+                  >
+                    <Mail className="h-4 w-4 shrink-0 text-brand" /> {email}
+                  </a>
+                </li>
+
                 <li className="flex items-start gap-2">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand" /> {businessAddress}
                 </li>
