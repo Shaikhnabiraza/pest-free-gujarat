@@ -430,7 +430,7 @@ function Index() {
               {[
                 { v: "30+", l: "Years Experience" },
                 { v: "5,000+", l: "Properties Treated" },
-                { v: "5.9★", l: "Customer Rating" },
+                { v: "5.0★", l: "Customer Rating" },
               ].map((s) => (
                 <div key={s.l}>
                   <dt className="font-display text-2xl font-extrabold text-brand sm:text-3xl">{s.v}</dt>
