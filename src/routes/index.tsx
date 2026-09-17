@@ -39,11 +39,26 @@ export const Route = createFileRoute("/")({
   head: () => {
     const jsonLd = {
       "@context": "https://schema.org",
-      "@type": "PestControlService",
-      name: "Asian Pest Control (Munna Bhai)",
+      "@type": ["LocalBusiness", "PestControlService"],
+      "@id": `${siteUrl}/#business`,
+      name: "Asian Pest Control",
+      alternateName: ["Asian Pest Control (Munna Bhai)", "APC Pest Control Vadodara"],
+      slogan: "Termite specialists with a 5-year guarantee — serving Fatehgunj since 1995",
+      description:
+        "Asian Pest Control (Munna Bhai) provides professional pest control services in Fatehgunj, Vadodara since 1995 — termite treatment with a 5-year guarantee, cockroach, bed bug, rodent and mosquito control for homes and businesses.",
       image: `${siteUrl}/images/hero-pest-control.jpg`,
+      logo: `${siteUrl}/images/apc-logo.png`,
       email: "asianpestcontrol.apc@gmail.com",
       telephone: "+91-99981-79902",
+      knowsAbout: [
+        "termite treatment",
+        "cockroach control",
+        "bed bug treatment",
+        "rodent control",
+        "mosquito fogging",
+        "general pest control",
+        "anti-termite treatment",
+      ],
 
       address: {
         "@type": "PostalAddress",
@@ -55,7 +70,13 @@ export const Route = createFileRoute("/")({
       },
       geo: { "@type": "GeoCoordinates", latitude: "22.3193", longitude: "73.1899" },
       url: siteUrl,
+      hasMap: "https://www.google.com/maps/search/?api=1&query=Asian+Pest+Control+Fatehgunj+Vadodara&query_place_id=ChIJ2_EOU8DPXzkReg8ZURc-QyE",
+      sameAs: [
+        "https://www.google.com/maps/search/?api=1&query=Asian+Pest+Control+Fatehgunj+Vadodara&query_place_id=ChIJ2_EOU8DPXzkReg8ZURc-QyE",
+      ],
       priceRange: "₹₹",
+      currenciesAccepted: "INR",
+      paymentAccepted: "Cash, UPI, Bank Transfer",
       aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "182" },
       openingHoursSpecification: [
         {
@@ -65,8 +86,15 @@ export const Route = createFileRoute("/")({
           closes: "20:00",
         },
       ],
-      areaServed: "Fatehgunj, Vadodara, Gujarat, India",
+      areaServed: [
+        { "@type": "Place", name: "Fatehgunj, Vadodara" },
+        { "@type": "Place", name: "Sayajigunj, Vadodara" },
+        { "@type": "Place", name: "Alkapuri, Vadodara" },
+        { "@type": "Place", name: "Karelibaug, Vadodara" },
+        { "@type": "City", name: "Vadodara, Gujarat" },
+      ],
       foundingDate: "1995",
+      founder: { "@type": "Person", name: "Munna Bhai" },
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "Pest Control Services",
