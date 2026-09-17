@@ -118,8 +118,13 @@ export const Route = createFileRoute("/")({
         {
           name: "keywords",
           content:
-            "pest control Vadodara, pest control Fatehgunj, termite treatment Vadodara, cockroach control, bed bug treatment, rodent control Gujarat",
+            "pest control Vadodara, pest control Fatehgunj, pest control near me, termite treatment Vadodara, anti termite treatment Gujarat, termite control 5 year guarantee, cockroach control Vadodara, bed bug treatment Vadodara, rodent control Gujarat, mosquito fogging Vadodara, Asian Pest Control, Munna Bhai pest control, pest control services Vadodara Gujarat, home pest control Fatehgunj, office pest control Vadodara",
         },
+        { name: "robots", content: "index, follow, max-image-preview:large" },
+        { name: "geo.region", content: "IN-GJ" },
+        { name: "geo.placename", content: "Fatehgunj, Vadodara, Gujarat" },
+        { name: "geo.position", content: "22.3193;73.1899" },
+        { name: "ICBM", content: "22.3193, 73.1899" },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
         { property: "og:type", content: "website" },
@@ -830,6 +835,59 @@ function Index() {
                     className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-brand px-4 py-3 text-sm font-bold text-brand transition-all hover:-translate-y-0.5 hover:bg-brand hover:text-brand-foreground"
                   >
                     <MessageCircle className="h-4 w-4" /> WhatsApp Us
+                  </a>
+                </div>
+              </div>
+
+              {/* Google Business snippet */}
+              <div className="rounded-2xl border border-border bg-card p-6 shadow-soft sm:p-8">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <div className="text-sm font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+                      Google Business Profile
+                    </div>
+                    <h3 className="mt-1 text-xl font-extrabold text-navy">Asian Pest Control</h3>
+                    <p className="text-sm text-muted-foreground">Pest control service · Fatehgunj, Vadodara</p>
+                  </div>
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand/10 text-brand">
+                    <MapPin className="h-5 w-5" />
+                  </span>
+                </div>
+                <div className="mt-4 flex items-center gap-2">
+                  <span className="flex text-amber-400" aria-hidden="true">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-amber-400" />
+                    ))}
+                  </span>
+                  <span className="font-bold text-navy">4.9</span>
+                  <span className="text-sm text-muted-foreground">· 182 Google reviews</span>
+                </div>
+                <dl className="mt-4 space-y-1 text-sm text-muted-foreground">
+                  <div className="flex gap-2">
+                    <dt className="font-semibold text-navy">Hours:</dt>
+                    <dd>Open Mon–Sat · Closes 8:00 PM</dd>
+                  </div>
+                  <div className="flex gap-2">
+                    <dt className="font-semibold text-navy">Phone:</dt>
+                    <dd>{phoneNumber}</dd>
+                  </div>
+                </dl>
+                <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=Asian+Pest+Control+Fatehgunj+Vadodara&query_place_id=ChIJ2_EOU8DPXzkReg8ZURc-QyE"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl gradient-brand px-4 py-3 text-sm font-bold text-brand-foreground transition-all hover:-translate-y-0.5 hover:shadow-lift"
+                  >
+                    <MapPin className="h-4 w-4" /> View on Google Maps
+                  </a>
+                  <a
+                    href="https://search.google.com/local/writereview?placeid=ChIJ2_EOU8DPXzkReg8ZURc-QyE"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-brand px-4 py-3 text-sm font-bold text-brand transition-all hover:-translate-y-0.5 hover:bg-brand hover:text-brand-foreground"
+                  >
+                    <Star className="h-4 w-4" /> Write a Review
                   </a>
                 </div>
               </div>
