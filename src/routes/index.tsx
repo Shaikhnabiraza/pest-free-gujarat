@@ -925,7 +925,7 @@ function Index() {
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             <div>
               <div className="flex items-center gap-2.5">
-                <img src="/favicon.png" alt="Asian Pest Control" width={40} height={40} className="h-10 w-10 rounded-xl" />
+                <img src="/logo-apc.png" alt="Asian Pest Control APC logo" width={44} height={44} loading="lazy" className="logo-mark h-11 w-11" />
                 <span className="leading-tight">
                   <span className="block font-display text-lg font-extrabold">Asian Pest Control</span>
                   <span className="block text-[11px] font-semibold uppercase tracking-[0.18em] text-brand">
